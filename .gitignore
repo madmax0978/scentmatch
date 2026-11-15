@@ -8,3 +8,4 @@ data/vocab/*.csv
 data/*.db
 checkpoints/
 .DS_Store
+*.egg-info/
