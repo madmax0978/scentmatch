@@ -1,0 +1,8 @@
+[15:17:01] building note vocabulary
+[15:17:02] filtering fragrance items from metadata
+[15:17:04] extracting notes for 52,450 items
+[15:17:24] loading ratings for fragrance items
+[15:17:31] k-core (k=3)
+[15:17:32] writing parquet files
+[15:17:32] loading catalogue into SQLite
+[15:17:32] done: {"k_core": 3, "positive_threshold": 4.0, "vocab_notes": 699, "fragrance_items": 52450, "items_with_notes_all": 35226, "ratings": 1043457, "rating_users": 819063, "rating_items": 52447, "date_min": "2003-01-20", "date_max": "2023-09-12", "positives": 823769, "users": 23290, "items": 6098, "interactions": 97713, "train": 51133, "val": 23290, "test": 23290, "density": 0.0006880110900800029, "positives_per_user": 4.195491627307858, "notes_in_graph": 464, "item_note_edges": 30840, "items_with_notes": 4598, "items_with_notes_pct": 0.7540177107248278}

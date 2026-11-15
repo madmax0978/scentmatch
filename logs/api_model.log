@@ -1,0 +1,14 @@
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/.venv/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+INFO:     Started server process [71403]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8001 (Press CTRL+C to quit)
+INFO:     127.0.0.1:62468 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62470 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62472 - "GET /recommendations/AE23EQE2MJSSHIIPNCTYQVK6SBTQ?k=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62474 - "POST /recommendations/quiz HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [71403]

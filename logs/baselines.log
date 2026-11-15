@@ -1,0 +1,4 @@
+Random val {'NDCG@10': 0.0008, 'Recall@20': 0.0039, 'Coverage@10': 1.0, 'AvgPop@10': 8.3091, 'n_users': 23290}
+Random test {'NDCG@10': 0.0009, 'Recall@20': 0.0033, 'Coverage@10': 1.0, 'AvgPop@10': 8.3074, 'n_users': 23290}
+Most-popular val {'NDCG@10': 0.0359, 'Recall@20': 0.0929, 'Coverage@10': 0.0026, 'AvgPop@10': 297.5372, 'n_users': 23290}
+Most-popular test {'NDCG@10': 0.0421, 'Recall@20': 0.1046, 'Coverage@10': 0.0028, 'AvgPop@10': 296.3461, 'n_users': 23290}

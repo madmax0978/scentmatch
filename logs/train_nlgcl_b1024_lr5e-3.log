@@ -1,0 +1,22 @@
+  vu = torch.as_tensor(data.val["user_idx"].to_numpy())
+graph: 23290 users, 6098 perfumes, 0 notes, 102266 directed edges; params=1,880,832
+{'epoch': 1, 'loss': 0.95776, 'bpr': 0.6862, 'cl': 5430.9982, 'reg': 0.07831, 'train_seconds': 3.04892, 'val_bpr': 0.69157, 'val_NDCG@10': 0.03255, 'val_Recall@20': 0.08257, 'val_Coverage@10': 0.38226}
+{'epoch': 2, 'loss': 0.86797, 'bpr': 0.67198, 'cl': 3919.53684, 'reg': 0.17402, 'train_seconds': 2.69437, 'val_bpr': 0.68961, 'val_NDCG@10': 0.02599, 'val_Recall@20': 0.07694, 'val_Coverage@10': 0.24598}
+{'epoch': 3, 'loss': 0.83514, 'bpr': 0.65196, 'cl': 3663.12275, 'reg': 0.26681, 'train_seconds': 2.68557, 'val_bpr': 0.68583, 'val_NDCG@10': 0.02964, 'val_Recall@20': 0.08205, 'val_Coverage@10': 0.20384}
+{'epoch': 4, 'loss': 0.79357, 'bpr': 0.61622, 'cl': 3546.26009, 'reg': 0.4144, 'train_seconds': 3.04145, 'val_bpr': 0.67798, 'val_NDCG@10': 0.03865, 'val_Recall@20': 0.0991, 'val_Coverage@10': 0.214}
+{'epoch': 5, 'loss': 0.73209, 'bpr': 0.55788, 'cl': 3482.89558, 'reg': 0.64913, 'train_seconds': 3.07732, 'val_bpr': 0.66377, 'val_NDCG@10': 0.04767, 'val_Recall@20': 0.11868, 'val_Coverage@10': 0.24336}
+{'epoch': 6, 'loss': 0.65132, 'bpr': 0.47813, 'cl': 3461.8927, 'reg': 1.00661, 'train_seconds': 2.80447, 'val_bpr': 0.64174, 'val_NDCG@10': 0.05383, 'val_Recall@20': 0.13358, 'val_Coverage@10': 0.2814}
+{'epoch': 7, 'loss': 0.56163, 'bpr': 0.38908, 'cl': 3448.078, 'reg': 1.48736, 'train_seconds': 2.70137, 'val_bpr': 0.61561, 'val_NDCG@10': 0.05699, 'val_Recall@20': 0.14358, 'val_Coverage@10': 0.3265}
+{'epoch': 8, 'loss': 0.47676, 'bpr': 0.30466, 'cl': 3437.78113, 'reg': 2.06655, 'train_seconds': 2.97157, 'val_bpr': 0.59163, 'val_NDCG@10': 0.05913, 'val_Recall@20': 0.15015, 'val_Coverage@10': 0.36619}
+{'epoch': 9, 'loss': 0.40638, 'bpr': 0.23452, 'cl': 3431.81819, 'reg': 2.69139, 'train_seconds': 3.01356, 'val_bpr': 0.57126, 'val_NDCG@10': 0.06035, 'val_Recall@20': 0.15303, 'val_Coverage@10': 0.40899}
+{'epoch': 10, 'loss': 0.35069, 'bpr': 0.17981, 'cl': 3410.8015, 'reg': 3.32689, 'train_seconds': 3.02087, 'val_bpr': 0.55675, 'val_NDCG@10': 0.0613, 'val_Recall@20': 0.15444, 'val_Coverage@10': 0.44736}
+{'epoch': 11, 'loss': 0.30902, 'bpr': 0.13885, 'cl': 3395.5223, 'reg': 3.9526, 'train_seconds': 2.66508, 'val_bpr': 0.54523, 'val_NDCG@10': 0.06138, 'val_Recall@20': 0.15539, 'val_Coverage@10': 0.48032}
+{'epoch': 12, 'loss': 0.27944, 'bpr': 0.10967, 'cl': 3386.48629, 'reg': 4.54538, 'train_seconds': 3.31429, 'val_bpr': 0.53906, 'val_NDCG@10': 0.0617, 'val_Recall@20': 0.15539, 'val_Coverage@10': 0.50656}
+{'epoch': 13, 'loss': 0.25603, 'bpr': 0.08689, 'cl': 3372.62466, 'reg': 5.08564, 'train_seconds': 3.00961, 'val_bpr': 0.53353, 'val_NDCG@10': 0.06198, 'val_Recall@20': 0.15449, 'val_Coverage@10': 0.52886}
+{'epoch': 14, 'loss': 0.23912, 'bpr': 0.07062, 'cl': 3358.8299, 'reg': 5.6, 'train_seconds': 2.77257, 'val_bpr': 0.53147, 'val_NDCG@10': 0.06149, 'val_Recall@20': 0.15346, 'val_Coverage@10': 0.5487}
+{'epoch': 15, 'loss': 0.22546, 'bpr': 0.058, 'cl': 3337.23321, 'reg': 6.07963, 'train_seconds': 3.01382, 'val_bpr': 0.5332, 'val_NDCG@10': 0.06106, 'val_Recall@20': 0.15316, 'val_Coverage@10': 0.56707}
+{'epoch': 16, 'loss': 0.21551, 'bpr': 0.04856, 'cl': 3325.938, 'reg': 6.52468, 'train_seconds': 3.16423, 'val_bpr': 0.53353, 'val_NDCG@10': 0.06106, 'val_Recall@20': 0.15157, 'val_Coverage@10': 0.58232}
+{'epoch': 17, 'loss': 0.2075, 'bpr': 0.04089, 'cl': 3318.3659, 'reg': 6.93312, 'train_seconds': 3.09936, 'val_bpr': 0.53443, 'val_NDCG@10': 0.06053, 'val_Recall@20': 0.15011, 'val_Coverage@10': 0.5961}
+{'epoch': 18, 'loss': 0.20162, 'bpr': 0.0354, 'cl': 3309.77489, 'reg': 7.31773, 'train_seconds': 2.70815, 'val_bpr': 0.53392, 'val_NDCG@10': 0.05995, 'val_Recall@20': 0.14856, 'val_Coverage@10': 0.60774}
+early stopping at epoch 18
+{"run": "nlgcl_b1024_lr5e-3", "best_epoch": 13, "best_val_NDCG@10": 0.06197657412310244, "epochs_run": 18, "checkpoint": "/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/checkpoints/nlgcl_b1024_lr5e-3.pt", "log": "/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/logs/train_nlgcl_b1024_lr5e-3.csv"}

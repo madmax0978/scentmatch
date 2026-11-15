@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: scentmatch
+Version: 0.2.0
+Summary: ScentMatch: note-aware perfume recommendation with NLGCL graph contrastive learning
+Requires-Python: >=3.10

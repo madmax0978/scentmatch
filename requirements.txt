@@ -1,0 +1,14 @@
+torch==2.15.0
+torch_geometric==2.8.1
+numpy==2.4.6
+pandas==3.1.1
+pyarrow==26.0.1
+pyyaml==6.0.3
+fastapi==0.163.1
+uvicorn==0.54.0
+pydantic==2.14.3
+requests==2.34.2
+streamlit==1.67.0
+matplotlib==3.11.2
+pytest==9.2.0
+httpx==0.28.1

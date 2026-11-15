@@ -1,0 +1,31 @@
+# ScentMatch default configuration (Week 2)
+paths:
+  raw_dir: data/raw
+  vocab_dir: data/vocab
+  processed_dir: data/processed
+  checkpoints_dir: checkpoints
+  db_path: data/scentmatch.db
+
+data:
+  fragrance_category: "Fragrance"
+  positive_threshold: 4.0      # rating >= 4 -> positive implicit feedback
+  k_core: 3                    # users and items with >= 3 positives (iterative)
+  min_note_freq: 20            # Parfumo notes appearing in >= 20 perfumes enter the vocabulary
+
+model:
+  embedding_size: 64
+  n_layers: 2                  # L
+  cl_layers: 2                 # G <= L neighbour-layer pairs used in the contrastive loss
+  cl_temp: 0.1                 # tau
+  cl_weight: 5.0e-5            # lambda_1
+  reg_weight: 1.0e-4           # lambda_2
+  alpha: 0.6                   # user-side vs item-side weight (official NLGCL code)
+  use_notes: false             # Week 2: user-perfume graph; Week 3: user-perfume-note graph
+
+train:
+  epochs: 60
+  batch_size: 1024             # 4096 (paper) gave only 13 steps/epoch on our data
+  lr: 5.0e-3
+  eval_every: 1
+  early_stop_patience: 5
+  seed: 42

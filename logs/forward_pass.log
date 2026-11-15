@@ -1,0 +1,10 @@
+  out = model.loss(u, torch.as_tensor(data.train["item_idx"].values[:8]), torch.randint(0, data.n_items, (8,)))
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  "loss": float(out["loss"]), "bpr": float(out["bpr"]), "cl": float(out["cl"]),
+graph: 23290 users, 6098 perfumes, 0 notes, 102266 directed edges; params=1,880,832
+{"users_emb": [23290, 64], "items_emb": [6098, 64], "notes_emb": [0, 64], "n_layers": 2, "loss": 0.6969529390335083, "bpr": 0.6930847764015198, "cl": 77.35018920898438, "finite": true, "seconds": 0.031}
+  out = model.loss(u, torch.as_tensor(data.train["item_idx"].values[:8]), torch.randint(0, data.n_items, (8,)))
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  "loss": float(out["loss"]), "bpr": float(out["bpr"]), "cl": float(out["cl"]),
+graph: 23290 users, 6098 perfumes, 464 notes, 163946 directed edges; params=1,910,528
+{"users_emb": [23290, 64], "items_emb": [6098, 64], "notes_emb": [464, 64], "n_layers": 2, "loss": 0.6971129775047302, "bpr": 0.6931547522544861, "cl": 79.15101623535156, "finite": true, "seconds": 0.039}

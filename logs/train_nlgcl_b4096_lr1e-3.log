@@ -1,0 +1,21 @@
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  sums[k] += float(out[k])
+  vu = torch.as_tensor(data.val["user_idx"].to_numpy())
+graph: 23290 users, 6098 perfumes, 0 notes, 102266 directed edges; params=1,880,832
+{'epoch': 1, 'loss': 2.4554, 'bpr': 0.69292, 'cl': 35249.75781, 'reg': 0.00738, 'train_seconds': 1.76778, 'val_bpr': 0.69311, 'val_NDCG@10': 0.0204, 'val_Recall@20': 0.04839, 'val_Coverage@10': 0.60528}
+{'epoch': 2, 'loss': 2.00652, 'bpr': 0.69249, 'cl': 26280.57024, 'reg': 0.00972, 'train_seconds': 1.71117, 'val_bpr': 0.69307, 'val_NDCG@10': 0.03125, 'val_Recall@20': 0.07952, 'val_Coverage@10': 0.48491}
+{'epoch': 3, 'loss': 1.86444, 'bpr': 0.69214, 'cl': 23445.8774, 'reg': 0.01157, 'train_seconds': 1.71693, 'val_bpr': 0.69304, 'val_NDCG@10': 0.03464, 'val_Recall@20': 0.08927, 'val_Coverage@10': 0.45343}
+{'epoch': 4, 'loss': 1.80529, 'bpr': 0.69192, 'cl': 22267.43307, 'reg': 0.01284, 'train_seconds': 1.76172, 'val_bpr': 0.69302, 'val_NDCG@10': 0.03594, 'val_Recall@20': 0.09287, 'val_Coverage@10': 0.45228}
+{'epoch': 5, 'loss': 1.77517, 'bpr': 0.69179, 'cl': 21667.64175, 'reg': 0.01371, 'train_seconds': 1.73345, 'val_bpr': 0.69301, 'val_NDCG@10': 0.03632, 'val_Recall@20': 0.09523, 'val_Coverage@10': 0.44703}
+{'epoch': 6, 'loss': 1.75725, 'bpr': 0.69169, 'cl': 21311.01916, 'reg': 0.01438, 'train_seconds': 1.75304, 'val_bpr': 0.693, 'val_NDCG@10': 0.03653, 'val_Recall@20': 0.09695, 'val_Coverage@10': 0.45408}
+{'epoch': 7, 'loss': 1.74546, 'bpr': 0.69162, 'cl': 21076.5954, 'reg': 0.01496, 'train_seconds': 1.73778, 'val_bpr': 0.69299, 'val_NDCG@10': 0.03701, 'val_Recall@20': 0.09794, 'val_Coverage@10': 0.45015}
+{'epoch': 8, 'loss': 1.73731, 'bpr': 0.69156, 'cl': 20914.91496, 'reg': 0.01549, 'train_seconds': 1.75985, 'val_bpr': 0.69299, 'val_NDCG@10': 0.03716, 'val_Recall@20': 0.09742, 'val_Coverage@10': 0.45195}
+{'epoch': 9, 'loss': 1.73131, 'bpr': 0.69151, 'cl': 20796.05747, 'reg': 0.016, 'train_seconds': 1.70463, 'val_bpr': 0.69298, 'val_NDCG@10': 0.03733, 'val_Recall@20': 0.09802, 'val_Coverage@10': 0.45212}
+{'epoch': 10, 'loss': 1.7265, 'bpr': 0.69146, 'cl': 20700.82227, 'reg': 0.01647, 'train_seconds': 1.73076, 'val_bpr': 0.69298, 'val_NDCG@10': 0.03693, 'val_Recall@20': 0.09768, 'val_Coverage@10': 0.44966}
+{'epoch': 11, 'loss': 1.72172, 'bpr': 0.69141, 'cl': 20606.24279, 'reg': 0.01698, 'train_seconds': 1.72184, 'val_bpr': 0.69297, 'val_NDCG@10': 0.03715, 'val_Recall@20': 0.09725, 'val_Coverage@10': 0.45179}
+{'epoch': 12, 'loss': 1.71792, 'bpr': 0.69136, 'cl': 20531.14333, 'reg': 0.01746, 'train_seconds': 1.72173, 'val_bpr': 0.69297, 'val_NDCG@10': 0.03728, 'val_Recall@20': 0.09755, 'val_Coverage@10': 0.45048}
+{'epoch': 13, 'loss': 1.71671, 'bpr': 0.69131, 'cl': 20507.99361, 'reg': 0.01793, 'train_seconds': 1.71801, 'val_bpr': 0.69296, 'val_NDCG@10': 0.03683, 'val_Recall@20': 0.09601, 'val_Coverage@10': 0.44769}
+{'epoch': 14, 'loss': 1.71341, 'bpr': 0.69126, 'cl': 20443.06175, 'reg': 0.01844, 'train_seconds': 1.71353, 'val_bpr': 0.69295, 'val_NDCG@10': 0.03629, 'val_Recall@20': 0.09558, 'val_Coverage@10': 0.4431}
+early stopping at epoch 14
+{"run": "nlgcl", "best_epoch": 9, "best_val_NDCG@10": 0.03733008596179816, "epochs_run": 14, "checkpoint": "/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/checkpoints/nlgcl.pt", "log": "/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/logs/train_nlgcl.csv"}
+.venv/bin/python -m scentmatch.train.train --epochs 30  80.01s user 1.72s system 178% cpu 45.816 total
