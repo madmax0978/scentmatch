@@ -17,7 +17,7 @@ The data pipeline runs on the full dataset. The evaluation harness, the NLGCL mo
 
 ```bash
 # 1. clone and enter the repo
-git clone <repo-url> scentmatch && cd scentmatch
+git clone https://github.com/madmax0978/scentmatch.git && cd scentmatch
 
 # 2. create a virtual environment (Python 3.11)
 python3.11 -m venv .venv && source .venv/bin/activate
