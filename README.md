@@ -1,72 +1,73 @@
 # ScentMatch
 
-ScentMatch (Group 4) recommends perfumes from the notes a user loves. It uses **NLGCL** graph contrastive learning (Xu et al., ACM RecSys 2025) over a user–perfume(–note) graph. A short taste quiz serves brand-new users from their first visit.
+ScentMatch recommends perfumes.
+- **New visitors** answer a 6-question quiz. Their answers become olfactory notes (vanilla, oud, bergamot…), and the app suggests perfumes that carry those notes.
+- **Known users** get recommendations from **NLGCL**, a graph neural network (Xu et al., RecSys 2025) trained on Amazon reviews.
 
-| Member | Role | Owns |
-|---|---|---|
-| Lisa El Gabteni | Project Lead (PL) | evaluation harness, split, graph construction |
-| Maxime Dutertre | Data Engineer (DE) | data pipeline, note vocabulary, SQLite, `/log_interaction` |
-| Mina Aired | Lead ML Engineer (MLE-Core) | NLGCL model, note-node extension |
-| Halima Ghazi | ML Engineer (MLE-Ops) | training loop, checkpoints, `predict()` |
-| Ambrine Senoussi | Systems Engineer (SE) | FastAPI backend, Streamlit app, deployment |
+Every recommendation comes with a short reason, for example *"Because you chose oud, amber and leather"*.
 
-## Status (Week 2)
-The data pipeline runs on the full dataset. The evaluation harness, the NLGCL model and training, and the API work end to end. The API serves mock recommendations by default; `SCENTMATCH_MODE=model` makes it serve the trained model. See `reports/` for the status report.
+## Team (Group 4)
 
-## Run locally (about 5 minutes after the data download)
+| Member | Role |
+|---|---|
+| Lisa El Gabteni | Project Lead |
+| Maxime Dutertre | Data Engineer |
+| Mina Aired | ML Engineer (model) |
+| Halima Ghazi | ML Engineer (training) |
+| Ambrine Senoussi | Software Engineer (API and app) |
+
+## Quick start
+
+Requires Python 3.11.
 
 ```bash
-# 1. clone and enter the repo
 git clone https://github.com/madmax0978/scentmatch.git && cd scentmatch
-
-# 2. create a virtual environment (Python 3.11)
 python3.11 -m venv .venv && source .venv/bin/activate
-
-# 3. install
 pip install -r requirements.txt && pip install -e .
 
-# 4. download the raw data (about 4.2 GB, public)
-bash scripts/download_data.sh
+bash scripts/download_data.sh          # public data, about 4.2 GB
+python -m scentmatch.data.pipeline     # builds the dataset, about 35 s
+python -m scentmatch.train.train       # trains the model, about 1 min on a laptop
 
-# 5. build the dataset: fragrance filter, notes, k-core, split, SQLite (about 35 s)
-python -m scentmatch.data.pipeline
-
-# 6. start the API (mock mode; use SCENTMATCH_MODE=model after step 8)
-uvicorn scentmatch.api.main:app --port 8000
-#    -> http://localhost:8000/docs
-
-# 7. in a second terminal, start the app
-streamlit run app/streamlit_app.py
-#    -> http://localhost:8501
+scripts/run_demo.sh                    # starts the API and the website
 ```
 
-### Train the model (optional, about 40 s on a laptop CPU)
+Then open **http://localhost:8501**.
+- To skip training, run `SCENTMATCH_MODE=mock scripts/run_demo.sh`. This shows placeholder recommendations.
+- To try the "Your collection" tab, click a demo profile or paste the user id `AEJI7MSPXQCTPRTWBSQYK4NU7AOQ`.
+
+## How it works
+
+1. **Data:** Amazon Reviews 2023, perfumes only. A rating of 4 or 5 stars counts as "liked". The result is 23,290 users, 6,098 perfumes and 97,713 likes.
+2. **Notes:** a list of 699 notes from Parfumo (open data) is matched against each product description. 75% of the perfumes get at least one note.
+3. **Split:** for each user, the last like goes to the test set, the one before goes to the validation set, and the rest is used for training.
+4. **Model:** NLGCL learns from the user–perfume graph. On validation it reaches NDCG@10 = 0.062, against 0.036 for "most popular".
+5. **Quiz:** the app ranks perfumes by how well their notes match the chosen notes (60%). It adds what the model says people with that taste also love (25%) and the Amazon rating (15%).
+6. **API and app:** a FastAPI server serves the recommendations, and the Streamlit website shows them. Each "Love it" or "Not for me" click is saved in a SQLite database.
+
+## Useful commands
+
 ```bash
-python -m scentmatch.train.train                 # user–perfume graph -> checkpoints/nlgcl.pt
-python -m scentmatch.train.train --use-notes     # user–perfume–note graph
-python -m scentmatch.train.train --forward-only  # smoke test: one forward pass
-SCENTMATCH_MODE=model uvicorn scentmatch.api.main:app --port 8000
+pytest -q                              # run the tests
+python -m scentmatch.eval.harness      # compare with random and most-popular baselines
 ```
 
-### Evaluate
-```bash
-python -m scentmatch.eval.harness   # random + most-popular sanity floor -> reports/baselines.json
-pytest -q                           # metrics on mock predictions, model forward pass, API contract
+API documentation: http://localhost:8000/docs (while the demo runs).
+
+## Project layout
+
+```
+configs/default.yaml     settings (paths, model size, training)
+src/scentmatch/data/     data pipeline and note vocabulary
+src/scentmatch/model/    NLGCL model and graph
+src/scentmatch/train/    training and recommendation logic
+src/scentmatch/eval/     metrics and baselines
+src/scentmatch/api/      FastAPI server, quiz, database
+app/streamlit_app.py     website
+scripts/                 data download, demo launcher
+tests/                   automated tests
 ```
 
-## Data
-- **Interactions:** Amazon Reviews 2023, `Beauty_and_Personal_Care`, rating-only file. We keep items whose categories contain "Fragrance". Ratings ≥ 4 count as positives, with an iterative 3-core and a leave-last-out temporal split.
-- **Note vocabulary:** Parfumo open data (TidyTuesday 2024-12-10). It provides 699 notes and 16 accords, matched in each perfume's title, description, features and `Scent` field.
-- **New interactions:** `POST /log_interaction` writes to `data/scentmatch.db`, table `interactions`.
+## Troubleshooting
 
-## Layout
-```
-configs/default.yaml        hyper-parameters and paths
-src/scentmatch/data/        vocab.py, pipeline.py
-src/scentmatch/eval/        metrics.py, harness.py, baselines.py
-src/scentmatch/model/       graph.py, nlgcl.py
-src/scentmatch/train/       train.py, predict.py (mock + model recommenders)
-src/scentmatch/api/         main.py (FastAPI), db.py (SQLite), quiz.py (quiz -> notes)
-app/streamlit_app.py        front end
-tests/                      pytest suite
-```
+`No module named 'scentmatch'`: this happens on macOS when the folder is synced by iCloud. Start the app with `scripts/run_demo.sh`, or put `PYTHONPATH=src` in front of your command.

@@ -57,3 +57,29 @@ def test_log_interaction_reaches_db(client):
 
 def test_bad_event_rejected(client):
     assert client.post("/log_interaction", json={"user_id": "u1", "event": "buy"}).status_code == 422
+
+
+def test_perfume_endpoint_serialises(client):
+    r = client.post("/recommendations/quiz", json={"answers": {"taste": "Sweet"}})
+    asin = r.json()["items"][0]["parent_asin"]
+    r = client.get(f"/perfumes/{asin}")
+    assert r.status_code == 200 and r.json()["parent_asin"] == asin
+    assert isinstance(r.json()["notes"], list)
+    assert client.get("/perfumes/NOPE").status_code == 404
+
+
+@pytest.mark.skipif(not (cfg["paths"]["checkpoints_dir"] / "nlgcl.pt").exists(), reason="needs a trained checkpoint")
+def test_model_quiz_follows_the_answers():
+    """Two opposite quiz profiles must get (almost) disjoint lists that carry the chosen notes."""
+    from scentmatch.api.quiz import seed_notes
+    from scentmatch.train.predict import Catalogue, ModelRecommender
+    proc = cfg["paths"]["processed_dir"]
+    cat = Catalogue(proc)
+    rec = ModelRecommender(cat, cfg["paths"]["checkpoints_dir"] / "nlgcl.pt", proc)
+    sweet = seed_notes({"taste": "Sweet", "season": "Winter", "intensity": "Bold, noticed from afar"})
+    fresh = seed_notes({"taste": "Fresh", "season": "Summer", "place": "The beach"})
+    a, b = rec.recommend_notes(sweet), rec.recommend_notes(fresh)
+    assert len({r.item_idx for r in a} & {r.item_idx for r in b}) <= 2
+    for recs, notes in ((a, sweet), (b, fresh)):
+        ids = {cat.note_idx[n] for n in notes}
+        assert all(cat.notes_of(r.item_idx) & ids for r in recs)

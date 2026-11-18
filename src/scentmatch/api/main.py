@@ -1,6 +1,7 @@
 """ScentMatch REST API (Systems Engineer).
 
     GET  /health                         status, serving mode, catalogue size
+    GET  /notes                          note vocabulary (for the "notes you love" picker)
     GET  /quiz                           the taste-quiz questions
     GET  /recommendations/{user_id}      top-k for a known user
     POST /recommendations/quiz           top-k for a new user from quiz answers / seed notes
@@ -44,7 +45,9 @@ class Perfume(BaseModel):
     rank: int
     parent_asin: str
     title: str
+    name: str                       # short display name, e.g. "Yara" instead of the full Amazon title
     brand: str
+    rating: float | None = None
     notes: list[str]
     image: str | None
     score: float
@@ -55,6 +58,7 @@ class RecResponse(BaseModel):
     user_id: str | None
     mode: str
     seed_notes: list[str] | None = None
+    history: list[str] | None = None   # known user: perfumes they loved in the training data
     items: list[Perfume]
 
 
@@ -72,14 +76,17 @@ class InteractionIn(BaseModel):
     payload: dict | None = None
 
 
-def _to_response(recs: list[Rec], user_id: str | None, notes: list[str] | None = None) -> RecResponse:
+def _to_response(recs: list[Rec], user_id: str | None, notes: list[str] | None = None,
+                 history: list[str] | None = None) -> RecResponse:
     info = catalogue.items.loc[[r.item_idx for r in recs]]
     items = []
     for rank, (r, (_, row)) in enumerate(zip(recs, info.iterrows()), start=1):
+        rating = row["average_rating"]
         items.append(Perfume(rank=rank, parent_asin=row["parent_asin"], title=row["title"],
-                             brand=row["store"], notes=[n for n in row["notes"].split(", ") if n],
+                             name=catalogue.short_titles[r.item_idx], brand=row["store"],
+                             rating=None if rating != rating else float(rating), notes=[n for n in row["notes"].split(", ") if n],
                              image=row["image"], score=round(float(r.score), 4), explanation=r.explanation))
-    return RecResponse(user_id=user_id, mode=recommender.mode, seed_notes=notes, items=items)
+    return RecResponse(user_id=user_id, mode=recommender.mode, seed_notes=notes, history=history, items=items)
 
 
 @app.get("/health")
@@ -93,10 +100,19 @@ def quiz():
     return [{"id": q["id"], "question": q["question"], "options": list(q["options"])} for q in QUIZ]
 
 
+@app.get("/notes")
+def notes():
+    """Notes carried by at least one perfume (for the "notes you love" picker), most common first."""
+    counts = sorted(((len(v), catalogue.note_names[n]) for n, v in catalogue.items_by_note.items()), reverse=True)
+    return [name for _, name in counts]
+
+
 @app.get("/recommendations/{user_id}", response_model=RecResponse)
 def recommend_user(user_id: str, k: int = Query(10, ge=1, le=50)):
     try:
-        return _to_response(recommender.recommend_user(user_id, k), user_id)
+        recs = recommender.recommend_user(user_id, k)
+        seen = catalogue.train_items.get(catalogue.user_idx.get(user_id), [])
+        return _to_response(recs, user_id, history=[catalogue.short_titles[i] for i in seen])
     except KeyError:
         raise HTTPException(404, f"unknown user '{user_id}': use POST /recommendations/quiz")
 
@@ -125,5 +141,13 @@ def perfume(parent_asin: str):
     hit = catalogue.items[catalogue.items["parent_asin"] == parent_asin]
     if hit.empty:
         raise HTTPException(404, "unknown perfume")
-    row = hit.iloc[0]
-    return {"item_idx": int(hit.index[0]), **{k: (None if v != v else v) for k, v in row.drop("categories").items()}}
+    row = hit.iloc[0].drop("categories")
+    out = {"item_idx": int(hit.index[0])}
+    for k, v in row.items():                      # numpy scalars / arrays -> plain JSON types
+        if hasattr(v, "tolist"):
+            v = v.tolist()
+        elif isinstance(v, float) and v != v:     # NaN
+            v = None
+        out[k] = v
+    out["notes"] = [n for n in (out.get("notes") or "").split(", ") if n]   # same format as /recommendations
+    return out
