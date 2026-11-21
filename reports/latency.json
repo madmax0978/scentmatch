@@ -1,0 +1,39 @@
+{
+ "health": {
+  "status": "ok",
+  "mode": "model",
+  "n_perfumes": 6098,
+  "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+  "n_logged_interactions": 31
+ },
+ "GET /recommendations/{user_id} (known user, NLGCL)": {
+  "n": 100,
+  "mean_ms": 3.5,
+  "p95_ms": 4.2,
+  "max_ms": 4.8
+ },
+ "POST /recommendations/quiz (new visitor)": {
+  "n": 100,
+  "mean_ms": 3.8,
+  "p95_ms": 4.2,
+  "max_ms": 4.6
+ },
+ "POST /recommendations/session (quiz + like, read from SQLite)": {
+  "n": 100,
+  "mean_ms": 3.9,
+  "p95_ms": 4.5,
+  "max_ms": 4.9
+ },
+ "GET /perfumes/{asin}/similar": {
+  "n": 100,
+  "mean_ms": 3.5,
+  "p95_ms": 4.0,
+  "max_ms": 4.4
+ },
+ "POST /log_interaction": {
+  "n": 100,
+  "mean_ms": 1.5,
+  "p95_ms": 1.8,
+  "max_ms": 2.7
+ }
+}

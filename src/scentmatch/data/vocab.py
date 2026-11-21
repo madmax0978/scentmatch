@@ -56,7 +56,22 @@ AMBIGUOUS = {"water", "air", "skin", "salt", "sugar", "milk", "cream", "wood", "
              "flowers", "fruits", "spices", "green notes", "fresh", "clean", "soap",
              "paper", "metal", "glass", "silk", "cotton", "nausea", "ozone", "earth",
              "sweet", "ice", "salty", "sea", "bitter", "warm", "cool", "light", "dark",
-             "gold", "black", "red", "white", "blue", "green", "pink", "love", "night"}
+             "gold", "black", "red", "white", "blue", "green", "pink", "love", "night",
+             # Week 3 audit: "orange leaves", "violet leaves" -> the plant is the note, not "leaves";
+             # "powder" is mostly a product ("dusting powder"), the note is "powdery notes"
+             "leaves", "powder", "butter"}
+
+# Week 3 audit: a note word followed by one of these words is not a scent note in the text
+# ("rose gold accents", "amber glass bottle", "enriched with coconut oil").
+NOT_A_NOTE_AFTER = {
+    "rose": r"gold",
+    "amber": r"glass|bottle|colou?r|colou?red|vial",
+    "coconut": r"oil|butter|milk lotion",
+    "almond": r"oil|butter",
+    "aloe": r"vera|mist|gel|juice",
+    "honey": r"comb applicator",
+    "cocoa": r"butter|orchid",          # "cacao butter" (skin care), "chocolate orchid" (a flower)
+}
 
 
 ACCORD_EXCLUDE = {"synthetic", "fresh", "sweet", "green", "creamy"}

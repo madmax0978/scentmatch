@@ -1,0 +1,40 @@
+{
+ "low_star_pairs_dropped_because_positive_in_rating_file": 90,
+ "reviews_found": 106372,
+ "ratings_1_3": 8622,
+ "label_by_stars": {
+  "1": {
+   "dislike": 1690,
+   "not_scent": 817,
+   "like": 214
+  },
+  "2": {
+   "dislike": 1136,
+   "not_scent": 441,
+   "like": 293
+  },
+  "3": {
+   "unclear": 1552,
+   "like": 1012,
+   "dislike": 778,
+   "not_scent": 689
+  }
+ },
+ "reasons_in_1_3_star": {
+  "scent_pos": 1902,
+  "scent_neg": 2236,
+  "longevity": 1813,
+  "product": 922,
+  "authenticity": 583,
+  "price": 894
+ },
+ "positives_with_scent_complaint": 1094,
+ "train_period": {
+  "dislike": 2218,
+  "like": 942
+ },
+ "eval_period": {
+  "dislike": 1386
+ },
+ "users_with_train_dislike": 1553
+}

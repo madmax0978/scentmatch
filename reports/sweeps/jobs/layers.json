@@ -1,0 +1,70 @@
+[
+ {
+  "name": "layers_L1_cl0",
+  "overrides": {
+   "n_layers": 1,
+   "cl_layers": 1,
+   "cl_weight": 0.0,
+   "reg_weight": 0.03
+  }
+ },
+ {
+  "name": "layers_L1_cl1e-05",
+  "overrides": {
+   "n_layers": 1,
+   "cl_layers": 1,
+   "cl_weight": 1e-05,
+   "reg_weight": 0.1
+  }
+ },
+ {
+  "name": "layers_L2_cl0",
+  "overrides": {
+   "n_layers": 2,
+   "cl_layers": 2,
+   "cl_weight": 0.0,
+   "reg_weight": 0.03
+  }
+ },
+ {
+  "name": "layers_L2_cl1e-05",
+  "overrides": {
+   "n_layers": 2,
+   "cl_layers": 2,
+   "cl_weight": 1e-05,
+   "reg_weight": 0.1
+  }
+ },
+ {
+  "name": "layers_L3_cl0",
+  "overrides": {
+   "n_layers": 3,
+   "cl_layers": 3,
+   "cl_weight": 0.0,
+   "reg_weight": 0.03
+  }
+ },
+ {
+  "name": "layers_L3_cl1e-05",
+  "overrides": {
+   "n_layers": 3,
+   "cl_layers": 3,
+   "cl_weight": 1e-05,
+   "reg_weight": 0.1
+  }
+ },
+ {
+  "name": "core3_cl1e-05_reg0.2",
+  "overrides": {
+   "cl_weight": 1e-05,
+   "reg_weight": 0.2
+  }
+ },
+ {
+  "name": "core3_cl5e-06_reg0.1",
+  "overrides": {
+   "cl_weight": 5e-06,
+   "reg_weight": 0.1
+  }
+ }
+]

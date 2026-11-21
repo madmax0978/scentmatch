@@ -1,4 +1,5 @@
-# ScentMatch default configuration (Week 2)
+# ScentMatch default configuration (Week 3: values chosen on the VALIDATION split, see
+# reports/sweeps/*.csv; the test split was used once, at the end)
 paths:
   raw_dir: data/raw
   vocab_dir: data/vocab
@@ -8,24 +9,31 @@ paths:
 
 data:
   fragrance_category: "Fragrance"
-  positive_threshold: 4.0      # rating >= 4 -> positive implicit feedback
+  positive_threshold: 4.0      # rating >= 4 -> positive; 1-3 stars are read in scentmatch.data.feedback
   k_core: 3                    # users and items with >= 3 positives (iterative)
   min_note_freq: 20            # Parfumo notes appearing in >= 20 perfumes enter the vocabulary
 
 model:
   embedding_size: 64
-  n_layers: 2                  # L
+  n_layers: 2                  # L (sweep: 1, 2, 3)
   cl_layers: 2                 # G <= L neighbour-layer pairs used in the contrastive loss
   cl_temp: 0.1                 # tau
-  cl_weight: 5.0e-5            # lambda_1
-  reg_weight: 1.0e-4           # lambda_2
+  cl_weight: 1.0e-5            # lambda_1 (sweep: 0 = LightGCN, 1e-5 ... 1e-3; >= 2e-4 stops learning)
+  reg_weight: 0.1              # lambda_2 (sweep: 1e-4 ... 0.2; Week 2 used 1e-4 and overfitted)
   alpha: 0.6                   # user-side vs item-side weight (official NLGCL code)
-  use_notes: false             # Week 2: user-perfume graph; Week 3: user-perfume-note graph
+  use_notes: true              # user-perfume-note graph (the innovation; helps the quiz path)
+  note_edge_weight: 0.3        # weight of perfume-note edges (sweep: 1, 0.3, 0.1)
+  note_cl_weight: 1.0e-5       # lambda_note, contrastive loss on perfume-note pairs (sweep: 0, 1e-5, 5e-5)
 
 train:
-  epochs: 60
+  epochs: 80
   batch_size: 1024             # 4096 (paper) gave only 13 steps/epoch on our data
   lr: 5.0e-3
   eval_every: 1
   early_stop_patience: 5
-  seed: 42
+  seed: 3                      # served model = seed 3 of the final runs (best validation NDCG)
+  dislike_neg_prob: 0.0        # P(negative = a perfume disliked in a review); tested 0.3/0.6, no gain
+  rescued_positives: true      # add 1-3 star reviews that praise the smell as positives (+1.3% val NDCG)
+
+serving:
+  checkpoint: final_nlgcl_notes_rescued_s3.pt   # = python -m scentmatch.train.train --run-name ...

@@ -1,0 +1,91 @@
+{
+ "runs": [
+  {
+   "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+   "split": "val",
+   "w_avoid": 0.05,
+   "n_users": 1553,
+   "n_future_dislike_pairs": 334,
+   "without": {
+    "NDCG@10": 0.05768105673943136,
+    "closeness_to_rejected@10": 0.3000516238421395,
+    "LikeVsDislike(future)": 0.5598802395209581
+   },
+   "with": {
+    "NDCG@10": 0.05731129622634647,
+    "closeness_to_rejected@10": 0.2886236954033976,
+    "LikeVsDislike(future)": 0.5658682634730539
+   }
+  },
+  {
+   "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+   "split": "val",
+   "w_avoid": 0.1,
+   "n_users": 1553,
+   "n_future_dislike_pairs": 334,
+   "without": {
+    "NDCG@10": 0.05768105673943136,
+    "closeness_to_rejected@10": 0.3000516238421395,
+    "LikeVsDislike(future)": 0.5598802395209581
+   },
+   "with": {
+    "NDCG@10": 0.05611578533897543,
+    "closeness_to_rejected@10": 0.27664675029038793,
+    "LikeVsDislike(future)": 0.5748502994011976
+   }
+  },
+  {
+   "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+   "split": "val",
+   "w_avoid": 0.2,
+   "n_users": 1553,
+   "n_future_dislike_pairs": 334,
+   "without": {
+    "NDCG@10": 0.05768105673943136,
+    "closeness_to_rejected@10": 0.3000516238421395,
+    "LikeVsDislike(future)": 0.5598802395209581
+   },
+   "with": {
+    "NDCG@10": 0.05344130388167652,
+    "closeness_to_rejected@10": 0.2518968415435129,
+    "LikeVsDislike(future)": 0.5688622754491018
+   }
+  },
+  {
+   "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+   "split": "val",
+   "w_avoid": 0.3,
+   "n_users": 1553,
+   "n_future_dislike_pairs": 334,
+   "without": {
+    "NDCG@10": 0.05768105673943136,
+    "closeness_to_rejected@10": 0.3000516238421395,
+    "LikeVsDislike(future)": 0.5598802395209581
+   },
+   "with": {
+    "NDCG@10": 0.05083018621513258,
+    "closeness_to_rejected@10": 0.22668901158106225,
+    "LikeVsDislike(future)": 0.5718562874251497
+   }
+  },
+  {
+   "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+   "split": "val",
+   "w_avoid": 0.6,
+   "n_users": 1553,
+   "n_future_dislike_pairs": 334,
+   "without": {
+    "NDCG@10": 0.05768105673943136,
+    "closeness_to_rejected@10": 0.3000516238421395,
+    "LikeVsDislike(future)": 0.5598802395209581
+   },
+   "with": {
+    "NDCG@10": 0.0402005743748925,
+    "closeness_to_rejected@10": 0.14399803963451732,
+    "LikeVsDislike(future)": 0.5658682634730539
+   }
+  }
+ ],
+ "baseline_NDCG@10": 0.05768105673943136,
+ "chosen_w_avoid": 0.1
+}

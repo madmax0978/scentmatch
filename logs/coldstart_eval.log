@@ -1,0 +1,154 @@
+{
+ "checkpoint": "cold_nlgcl.pt",
+ "protocol": "notes of the first liked perfume = quiz; targets = all other liked perfumes; model never saw these users",
+ "val_grid_quiz": {
+  "w_notes=0.0,beta=0.0": 0.01106,
+  "w_notes=0.0,beta=0.25": 0.02827,
+  "w_notes=0.0,beta=0.5": 0.03641,
+  "w_notes=0.0,beta=0.75": 0.04144,
+  "w_notes=0.0,beta=1.0": 0.04454,
+  "w_notes=0.2,beta=0.0": 0.01441,
+  "w_notes=0.2,beta=0.25": 0.02897,
+  "w_notes=0.2,beta=0.5": 0.03927,
+  "w_notes=0.2,beta=0.75": 0.04578,
+  "w_notes=0.2,beta=1.0": 0.04975,
+  "w_notes=0.35,beta=0.0": 0.01645,
+  "w_notes=0.35,beta=0.25": 0.02594,
+  "w_notes=0.35,beta=0.5": 0.03311,
+  "w_notes=0.35,beta=0.75": 0.03604,
+  "w_notes=0.35,beta=1.0": 0.03997,
+  "w_notes=0.5,beta=0.0": 0.01804,
+  "w_notes=0.5,beta=0.25": 0.02369,
+  "w_notes=0.5,beta=0.5": 0.02769,
+  "w_notes=0.5,beta=0.75": 0.02978,
+  "w_notes=0.5,beta=1.0": 0.03005,
+  "w_notes=0.65,beta=0.0": 0.02001,
+  "w_notes=0.65,beta=0.25": 0.02171,
+  "w_notes=0.65,beta=0.5": 0.02252,
+  "w_notes=0.65,beta=0.75": 0.02318,
+  "w_notes=0.65,beta=1.0": 0.02352,
+  "w_notes=0.8,beta=0.0": 0.01973,
+  "w_notes=0.8,beta=0.25": 0.01935,
+  "w_notes=0.8,beta=0.5": 0.01982,
+  "w_notes=0.8,beta=0.75": 0.01979,
+  "w_notes=0.8,beta=1.0": 0.01953,
+  "w_notes=1.0,beta=0.0": 0.0165
+ },
+ "val_grid_feedback": {
+  "w_notes=0.0,beta=0.0": 0.03297,
+  "w_notes=0.0,beta=0.25": 0.06347,
+  "w_notes=0.0,beta=0.5": 0.0711,
+  "w_notes=0.0,beta=0.75": 0.07266,
+  "w_notes=0.0,beta=1.0": 0.07368,
+  "w_notes=0.2,beta=0.0": 0.03917,
+  "w_notes=0.2,beta=0.25": 0.0617,
+  "w_notes=0.2,beta=0.5": 0.06868,
+  "w_notes=0.2,beta=0.75": 0.07299,
+  "w_notes=0.2,beta=1.0": 0.07292,
+  "w_notes=0.35,beta=0.0": 0.03694,
+  "w_notes=0.35,beta=0.25": 0.05384,
+  "w_notes=0.35,beta=0.5": 0.05845,
+  "w_notes=0.35,beta=0.75": 0.06112,
+  "w_notes=0.35,beta=1.0": 0.06069,
+  "w_notes=0.5,beta=0.0": 0.03233,
+  "w_notes=0.5,beta=0.25": 0.04386,
+  "w_notes=0.5,beta=0.5": 0.04478,
+  "w_notes=0.5,beta=0.75": 0.04431,
+  "w_notes=0.5,beta=1.0": 0.04114,
+  "w_notes=0.65,beta=0.0": 0.0283,
+  "w_notes=0.65,beta=0.25": 0.03068,
+  "w_notes=0.65,beta=0.5": 0.03084,
+  "w_notes=0.65,beta=0.75": 0.02881,
+  "w_notes=0.65,beta=1.0": 0.02603,
+  "w_notes=0.8,beta=0.0": 0.02367,
+  "w_notes=0.8,beta=0.25": 0.02275,
+  "w_notes=0.8,beta=0.5": 0.02312,
+  "w_notes=0.8,beta=0.75": 0.02162,
+  "w_notes=0.8,beta=1.0": 0.02071,
+  "w_notes=1.0,beta=0.0": 0.0165
+ },
+ "chosen": {
+  "quiz": {
+   "w_notes": 0.2,
+   "beta": 1.0
+  },
+  "feedback": {
+   "w_notes": 0.2,
+   "beta": 0.75
+  }
+ },
+ "test": {
+  "Most-popular": {
+   "NDCG@10": 0.0536364420710961,
+   "Recall@20": 0.09891700140706004,
+   "Coverage@10": 0.0018038701213512628,
+   "n_users": 1017
+  },
+  "quiz | ScentMatch (tuned)": {
+   "NDCG@10": 0.04654805169071339,
+   "Recall@20": 0.08196792079761477,
+   "Coverage@10": 0.23991472613971793,
+   "n_users": 1017
+  },
+  "quiz + 1 like | ScentMatch (tuned)": {
+   "NDCG@10": 0.07887922045441936,
+   "Recall@20": 0.1444231582485142,
+   "Coverage@10": 0.2738602820596917,
+   "n_users": 1017
+  },
+  "quiz | Notes only": {
+   "NDCG@10": 0.018177610197545414,
+   "Recall@20": 0.027963647386097315,
+   "Coverage@10": 0.5168907838635618,
+   "n_users": 1017
+  },
+  "quiz + 1 like | Notes only": {
+   "NDCG@10": 0.018177610197545414,
+   "Recall@20": 0.027963647386097315,
+   "Coverage@10": 0.5168907838635618,
+   "n_users": 1017
+  },
+  "quiz | Collaborative only, pure taste": {
+   "NDCG@10": 0.006798919193369824,
+   "Recall@20": 0.020839332770709883,
+   "Coverage@10": 0.32617251557887833,
+   "n_users": 1017
+  },
+  "quiz + 1 like | Collaborative only, pure taste": {
+   "NDCG@10": 0.03638543896546089,
+   "Recall@20": 0.07839329816716367,
+   "Coverage@10": 0.5985569039029189,
+   "n_users": 1017
+  },
+  "quiz | Collaborative only, model popularity": {
+   "NDCG@10": 0.04546028579213089,
+   "Recall@20": 0.08797013992667754,
+   "Coverage@10": 0.10413250245982289,
+   "n_users": 1017
+  },
+  "quiz + 1 like | Collaborative only, model popularity": {
+   "NDCG@10": 0.07863258888827011,
+   "Recall@20": 0.14632007420557747,
+   "Coverage@10": 0.17333551984257134,
+   "n_users": 1017
+  },
+  "quiz | Note-embedding fold-in (notes model)": {
+   "NDCG@10": 0.04723591424066358,
+   "Recall@20": 0.08867723410077495,
+   "Coverage@10": 0.06493932436864545,
+   "n_users": 1017
+  },
+  "quiz | ScentMatch on notes model": {
+   "NDCG@10": 0.052214918749428414,
+   "Recall@20": 0.09015419590222053,
+   "Coverage@10": 0.2330272220400131,
+   "n_users": 1017
+  },
+  "quiz + 1 like | ScentMatch on notes model": {
+   "NDCG@10": 0.08473181380805184,
+   "Recall@20": 0.15174527511433042,
+   "Coverage@10": 0.27763201049524433,
+   "n_users": 1017
+  }
+ }
+}

@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS interactions (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id    TEXT NOT NULL,
     item_id    TEXT,               -- parent_asin; NULL for quiz events
-    event      TEXT NOT NULL CHECK (event IN ('quiz','click','like','not_for_me','view')),
+    event      TEXT NOT NULL CHECK (event IN ('quiz','click','like','not_for_me','undo','view')),
     payload    TEXT,               -- JSON (quiz answers, rank position, ...)
     timestamp  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
@@ -40,10 +40,30 @@ def connect(db_path: Path):
         conn.close()
 
 
+EVENTS = ("quiz", "click", "like", "not_for_me", "undo", "view")
+
+
 def init_db(db_path: Path) -> None:
     Path(db_path).parent.mkdir(parents=True, exist_ok=True)
     with connect(db_path) as conn:
         conn.executescript(SCHEMA)
+        _migrate(conn)
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    """Databases created before 'undo' existed have an older CHECK constraint: rebuild the
+    table once, keeping every row (the log is append-only, nothing is lost)."""
+    sql = conn.execute("SELECT sql FROM sqlite_master WHERE name = 'interactions'").fetchone()[0]
+    if "'undo'" in sql:
+        return
+    conn.executescript("""
+        ALTER TABLE interactions RENAME TO interactions_old;
+        DROP INDEX IF EXISTS idx_interactions_user;
+    """ + SCHEMA + """
+        INSERT INTO interactions (id, user_id, item_id, event, payload, timestamp)
+            SELECT id, user_id, item_id, event, payload, timestamp FROM interactions_old;
+        DROP TABLE interactions_old;
+    """)
 
 
 def load_catalogue(db_path: Path, items_parquet: Path) -> int:
@@ -78,3 +98,11 @@ def get_perfumes(db_path: Path, item_idx: list[int]) -> dict[int, dict]:
 def count_interactions(db_path: Path) -> int:
     with connect(db_path) as conn:
         return conn.execute("SELECT COUNT(*) FROM interactions").fetchone()[0]
+
+
+def user_events(db_path: Path, user_id: str) -> list[dict]:
+    """Every logged event of one visitor, oldest first (used to rebuild their profile)."""
+    with connect(db_path) as conn:
+        rows = conn.execute("SELECT item_id, event, payload, timestamp FROM interactions "
+                            "WHERE user_id = ? ORDER BY id", (user_id,)).fetchall()
+    return [dict(r) for r in rows]

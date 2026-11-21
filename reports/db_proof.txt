@@ -1,0 +1,4 @@
+$ sqlite3 data/scentmatch.db "SELECT COUNT(*) FROM interactions WHERE event = 'like'"   -> 12
+POST /log_interaction {user_id: proof-1794999350, item_id: B07DK77F9Q, event: like} -> HTTP 201 {'id': 134, 'status': 'logged'}
+$ sqlite3 data/scentmatch.db "SELECT COUNT(*) FROM interactions WHERE event = 'like'"   -> 13
+new row: (134, 'proof-1794999350', 'B07DK77F9Q', 'like', '2026-11-18T10:55:50.756Z')

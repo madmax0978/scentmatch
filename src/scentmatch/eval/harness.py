@@ -36,17 +36,19 @@ class EvalData:
     n_items: int
     train: pd.DataFrame
     val: pd.DataFrame
-    test: pd.DataFrame
+    test: pd.DataFrame | None          # None while training: the test split is never loaded
     popularity: np.ndarray = field(init=False)
 
     def __post_init__(self):
         self.popularity = np.bincount(self.train["item_idx"], minlength=self.n_items).astype(float)
 
     @classmethod
-    def load(cls, processed_dir: Path) -> "EvalData":
-        tr = pd.read_parquet(processed_dir / "train.parquet")
+    def load(cls, processed_dir: Path, with_test: bool = True, train_file: str = "train.parquet") -> "EvalData":
+        """with_test=False is what training uses: the test file is not even read, so no
+        training or tuning decision can depend on it (leakage impossible by construction)."""
+        tr = pd.read_parquet(processed_dir / train_file)
         va = pd.read_parquet(processed_dir / "val.parquet")
-        te = pd.read_parquet(processed_dir / "test.parquet")
+        te = pd.read_parquet(processed_dir / "test.parquet") if with_test else None
         stats = json.loads((processed_dir / "stats.json").read_text())
         return cls(stats["users"], stats["items"], tr, va, te)
 
@@ -56,6 +58,8 @@ class EvalData:
         return {u: g.values for u, g in seen.groupby("user_idx")["item_idx"]}
 
     def targets(self, split: str) -> dict[int, set[int]]:
+        if split == "test" and self.test is None:
+            raise RuntimeError("the test split was not loaded (EvalData.load(with_test=False))")
         df = self.val if split == "val" else self.test
         return {u: set(g.values) for u, g in df.groupby("user_idx")["item_idx"]}
 
@@ -72,16 +76,16 @@ def _summarise(rankings: dict[int, list[int]], targets: dict[int, set[int]],
     }
 
 
-def evaluate_scores(score_fn: ScoreFn, data: EvalData, split: str = "test",
-                    batch_size: int = 2048, top: int = 20) -> dict[str, float]:
-    targets = data.targets(split)
+def rank_scores(score_fn: ScoreFn, data: EvalData, split: str = "test",
+                batch_size: int = 2048, top: int = 20, users: np.ndarray | None = None) -> dict[int, list[int]]:
+    """Top-`top` ranked perfumes per evaluation user, already-seen perfumes masked."""
     seen = data.seen_items(split)
-    users = np.array(sorted(targets))
+    users = np.array(sorted(data.targets(split))) if users is None else np.asarray(users)
     rankings: dict[int, list[int]] = {}
     for start in range(0, len(users), batch_size):
         batch = users[start:start + batch_size]
         scores = np.asarray(score_fn(batch), dtype=np.float32).copy()
-        for row, u in enumerate(batch):                       # mask already-seen perfumes
+        for row, u in enumerate(batch):
             if u in seen:
                 scores[row, seen[u]] = -np.inf
         part = np.argpartition(-scores, top, axis=1)[:, :top]
@@ -89,7 +93,12 @@ def evaluate_scores(score_fn: ScoreFn, data: EvalData, split: str = "test",
         top_items = np.take_along_axis(part, order, axis=1)
         for row, u in enumerate(batch):
             rankings[int(u)] = top_items[row].tolist()
-    return _summarise(rankings, targets, data)
+    return rankings
+
+
+def evaluate_scores(score_fn: ScoreFn, data: EvalData, split: str = "test",
+                    batch_size: int = 2048, top: int = 20) -> dict[str, float]:
+    return _summarise(rank_scores(score_fn, data, split, batch_size, top), data.targets(split), data)
 
 
 def evaluate_rankings(rankings: dict[int, list[int]], data: EvalData, split: str = "test") -> dict[str, float]:

@@ -1,0 +1,32 @@
+[
+ {
+  "name": "final_nlgcl_notes_rescued_s1",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "rescued_positives": true,
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_rescued_s2",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "rescued_positives": true,
+   "seed": 2
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_rescued_s3",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "rescued_positives": true,
+   "seed": 3
+  }
+ }
+]

@@ -1,0 +1,86 @@
+[
+ {
+  "name": "final_lightgcn_s1",
+  "overrides": {
+   "n_layers": 3,
+   "cl_layers": 3,
+   "cl_weight": 0.0,
+   "reg_weight": 0.03,
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_nlgcl_s1",
+  "overrides": {
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_s1",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_lightgcn_s2",
+  "overrides": {
+   "n_layers": 3,
+   "cl_layers": 3,
+   "cl_weight": 0.0,
+   "reg_weight": 0.03,
+   "seed": 2
+  }
+ },
+ {
+  "name": "final_nlgcl_s2",
+  "overrides": {
+   "seed": 2
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_s2",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "seed": 2
+  }
+ },
+ {
+  "name": "final_lightgcn_s3",
+  "overrides": {
+   "n_layers": 3,
+   "cl_layers": 3,
+   "cl_weight": 0.0,
+   "reg_weight": 0.03,
+   "seed": 3
+  }
+ },
+ {
+  "name": "final_nlgcl_s3",
+  "overrides": {
+   "seed": 3
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_s3",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "seed": 3
+  }
+ },
+ {
+  "name": "cold_nlgcl_notes",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "train_file": "cold/train.parquet"
+  }
+ }
+]

@@ -1,0 +1,70 @@
+[
+ {
+  "name": "fb_plain_p0.3_r0",
+  "overrides": {
+   "dislike_neg_prob": 0.3,
+   "rescued_positives": false
+  }
+ },
+ {
+  "name": "fb_plain_p0.6_r0",
+  "overrides": {
+   "dislike_neg_prob": 0.6,
+   "rescued_positives": false
+  }
+ },
+ {
+  "name": "fb_plain_p0_r1",
+  "overrides": {
+   "dislike_neg_prob": 0.0,
+   "rescued_positives": true
+  }
+ },
+ {
+  "name": "fb_plain_p0.3_r1",
+  "overrides": {
+   "dislike_neg_prob": 0.3,
+   "rescued_positives": true
+  }
+ },
+ {
+  "name": "fb_notes_p0.3_r0",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "dislike_neg_prob": 0.3,
+   "rescued_positives": false
+  }
+ },
+ {
+  "name": "fb_notes_p0.6_r0",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "dislike_neg_prob": 0.6,
+   "rescued_positives": false
+  }
+ },
+ {
+  "name": "fb_notes_p0_r1",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "dislike_neg_prob": 0.0,
+   "rescued_positives": true
+  }
+ },
+ {
+  "name": "fb_notes_p0.3_r1",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "dislike_neg_prob": 0.3,
+   "rescued_positives": true
+  }
+ }
+]

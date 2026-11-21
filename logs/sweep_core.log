@@ -1,0 +1,52 @@
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/.venv/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/.venv/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/.venv/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/.venv/lib/python3.11/site-packages/torch/jit/_script.py:1491: FutureWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:186: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  sums[k] += float(out[k])
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:186: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  sums[k] += float(out[k])
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:186: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  sums[k] += float(out[k])
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:186: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  sums[k] += float(out[k])
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:194: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:214.)
+  vu = torch.as_tensor(data.val["user_idx"].to_numpy())
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:194: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:214.)
+  vu = torch.as_tensor(data.val["user_idx"].to_numpy())
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:194: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:214.)
+  vu = torch.as_tensor(data.val["user_idx"].to_numpy())
+/Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/src/scentmatch/train/train.py:194: UserWarning: The given NumPy array is not writable, and PyTorch does not support non-writable tensors. This means writing to this tensor will result in undefined behavior. You may want to copy the array to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:214.)
+  vu = torch.as_tensor(data.val["user_idx"].to_numpy())
+{"name": "core_cl0_reg0.0001", "cl_weight": 0.0, "reg_weight": 0.0001, "best_epoch": 5, "epochs_run": 10, "val_NDCG@10": 0.0573, "val_Recall@20": 0.1468, "val_Coverage@10": 0.3667, "val_AvgPop@10": 127.374, "train_bpr": 0.0626, "val_bpr": 0.4672, "seconds": 60.4}
+{"name": "core_cl0_reg0.001", "cl_weight": 0.0, "reg_weight": 0.001, "best_epoch": 5, "epochs_run": 10, "val_NDCG@10": 0.0575, "val_Recall@20": 0.1472, "val_Coverage@10": 0.3701, "val_AvgPop@10": 127.1263, "train_bpr": 0.0638, "val_bpr": 0.4661, "seconds": 59.1}
+{"name": "core_cl0_reg0.01", "cl_weight": 0.0, "reg_weight": 0.01, "best_epoch": 26, "epochs_run": 31, "val_NDCG@10": 0.0637, "val_Recall@20": 0.1581, "val_Coverage@10": 0.6143, "val_AvgPop@10": 107.2474, "train_bpr": 0.0216, "val_bpr": 0.4769, "seconds": 179.0}
+{"name": "core_cl5e-05_reg0.0001", "cl_weight": 0.0001, "reg_weight": 0.0001, "best_epoch": 12, "epochs_run": 17, "val_NDCG@10": 0.0623, "val_Recall@20": 0.1543, "val_Coverage@10": 0.5051, "val_AvgPop@10": 107.9104, "train_bpr": 0.109, "val_bpr": 0.5365, "seconds": 118.1}
+{"name": "core_cl5e-05_reg0.001", "cl_weight": 0.0001, "reg_weight": 0.001, "best_epoch": 12, "epochs_run": 17, "val_NDCG@10": 0.0623, "val_Recall@20": 0.155, "val_Coverage@10": 0.5025, "val_AvgPop@10": 107.9229, "train_bpr": 0.1104, "val_bpr": 0.5367, "seconds": 114.5}
+{"name": "core_cl5e-05_reg0.01", "cl_weight": 0.0001, "reg_weight": 0.01, "best_epoch": 13, "epochs_run": 18, "val_NDCG@10": 0.0628, "val_Recall@20": 0.1568, "val_Coverage@10": 0.5208, "val_AvgPop@10": 105.9557, "train_bpr": 0.1016, "val_bpr": 0.5349, "seconds": 120.5}
+{"name": "core_cl0.0002_reg0.0001", "cl_weight": 0.0002, "reg_weight": 0.0001, "best_epoch": 1, "epochs_run": 6, "val_NDCG@10": 0.0343, "val_Recall@20": 0.0845, "val_Coverage@10": 0.4354, "val_AvgPop@10": 78.5358, "train_bpr": 0.6867, "val_bpr": 0.6918, "seconds": 40.1}
+{"name": "core_cl0.0002_reg0.001", "cl_weight": 0.0002, "reg_weight": 0.001, "best_epoch": 1, "epochs_run": 6, "val_NDCG@10": 0.0344, "val_Recall@20": 0.0847, "val_Coverage@10": 0.4367, "val_AvgPop@10": 78.7008, "train_bpr": 0.6867, "val_bpr": 0.6918, "seconds": 40.6}
+{"name": "core_cl0.0002_reg0.01", "cl_weight": 0.0002, "reg_weight": 0.01, "best_epoch": 1, "epochs_run": 6, "val_NDCG@10": 0.0349, "val_Recall@20": 0.086, "val_Coverage@10": 0.4457, "val_AvgPop@10": 80.5159, "train_bpr": 0.6867, "val_bpr": 0.6918, "seconds": 41.6}
+{"name": "core_cl0.001_reg0.0001", "cl_weight": 0.001, "reg_weight": 0.0001, "best_epoch": 1, "epochs_run": 6, "val_NDCG@10": 0.0353, "val_Recall@20": 0.0867, "val_Coverage@10": 0.4702, "val_AvgPop@10": 82.7677, "train_bpr": 0.6868, "val_bpr": 0.6919, "seconds": 40.5}
+{"name": "core_cl0.001_reg0.001", "cl_weight": 0.001, "reg_weight": 0.001, "best_epoch": 1, "epochs_run": 6, "val_NDCG@10": 0.0353, "val_Recall@20": 0.0868, "val_Coverage@10": 0.4708, "val_AvgPop@10": 82.8749, "train_bpr": 0.6868, "val_bpr": 0.6919, "seconds": 40.2}
+{"name": "core_cl0.001_reg0.01", "cl_weight": 0.001, "reg_weight": 0.01, "best_epoch": 1, "epochs_run": 6, "val_NDCG@10": 0.0357, "val_Recall@20": 0.0875, "val_Coverage@10": 0.4752, "val_AvgPop@10": 83.9096, "train_bpr": 0.6868, "val_bpr": 0.6919, "seconds": 31.7}
+{"run": "core_cl0_reg0.001", "best_epoch": 5, "best_val_NDCG@10": 0.05752433393457196, "epochs_run": 10, "seconds": 59.1}
+{"run": "core_cl5e-05_reg0.001", "best_epoch": 12, "best_val_NDCG@10": 0.062328196598822085, "epochs_run": 17, "seconds": 114.5}
+{"run": "core_cl0.0002_reg0.01", "best_epoch": 1, "best_val_NDCG@10": 0.034903256900956976, "epochs_run": 6, "seconds": 41.6}
+{"run": "core_cl0_reg0.01", "best_epoch": 26, "best_val_NDCG@10": 0.0637010060981049, "epochs_run": 31, "seconds": 179.0}
+{"run": "core_cl0.001_reg0.0001", "best_epoch": 1, "best_val_NDCG@10": 0.03529204032692929, "epochs_run": 6, "seconds": 40.5}
+{"run": "core_cl0_reg0.0001", "best_epoch": 5, "best_val_NDCG@10": 0.057315599416834444, "epochs_run": 10, "seconds": 60.4}
+{"run": "core_cl5e-05_reg0.01", "best_epoch": 13, "best_val_NDCG@10": 0.06282530111892061, "epochs_run": 18, "seconds": 120.5}
+{"run": "core_cl0.001_reg0.001", "best_epoch": 1, "best_val_NDCG@10": 0.03534357045157007, "epochs_run": 6, "seconds": 40.2}
+{"run": "core_cl5e-05_reg0.0001", "best_epoch": 12, "best_val_NDCG@10": 0.06227008269111321, "epochs_run": 17, "seconds": 118.1}
+{"run": "core_cl0.0002_reg0.0001", "best_epoch": 1, "best_val_NDCG@10": 0.034317311605195217, "epochs_run": 6, "seconds": 40.1}
+{"run": "core_cl0.0002_reg0.001", "best_epoch": 1, "best_val_NDCG@10": 0.034350526426216575, "epochs_run": 6, "seconds": 40.6}
+{"run": "core_cl0.001_reg0.01", "best_epoch": 1, "best_val_NDCG@10": 0.03569570309269722, "epochs_run": 6, "seconds": 31.7}

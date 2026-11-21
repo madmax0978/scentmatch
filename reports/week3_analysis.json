@@ -1,0 +1,95 @@
+{
+ "loss_curves": {
+  "LightGCN": {
+   "best_epoch": 27,
+   "epochs_run": 32,
+   "train_bpr_at_best": 0.06065323896706104,
+   "val_bpr_at_best": 0.44944676756858826,
+   "val_bpr_min": 0.4453798830509186,
+   "val_bpr_start": 0.5031796097755432
+  },
+  "NLGCL": {
+   "best_epoch": 21,
+   "epochs_run": 26,
+   "train_bpr_at_best": 0.1419178155064583,
+   "val_bpr_at_best": 0.47703972458839417,
+   "val_bpr_min": 0.47536587715148926,
+   "val_bpr_start": 0.6898760795593262
+  },
+  "NLGCL + notes + rescued": {
+   "best_epoch": 25,
+   "epochs_run": 30,
+   "train_bpr_at_best": 0.17157189080528185,
+   "val_bpr_at_best": 0.47853899002075195,
+   "val_bpr_min": 0.47517815232276917,
+   "val_bpr_start": 0.6907803416252136
+  }
+ },
+ "popularity": {
+  "spearman_norm_vs_popularity": 0.8450547151518538,
+  "beta_tradeoff": [
+   {
+    "beta": 0.0,
+    "NDCG@10": 0.04341381983521564,
+    "Coverage@10": 0.9931124959002952,
+    "AvgPop@10": 28.873503649635033,
+    "TailShare@10": 0.5006655216831258
+   },
+   {
+    "beta": 0.25,
+    "NDCG@10": 0.06587097585910977,
+    "Coverage@10": 0.8633978353558543,
+    "AvgPop@10": 67.6587591240876,
+    "TailShare@10": 0.2295448690425075
+   },
+   {
+    "beta": 0.5,
+    "NDCG@10": 0.07154644466061086,
+    "Coverage@10": 0.6526730075434569,
+    "AvgPop@10": 98.86970802919708,
+    "TailShare@10": 0.13754401030485186
+   },
+   {
+    "beta": 0.75,
+    "NDCG@10": 0.07150022106829029,
+    "Coverage@10": 0.5004919645785504,
+    "AvgPop@10": 122.24027050236153,
+    "TailShare@10": 0.09088449978531558
+   },
+   {
+    "beta": 1.0,
+    "NDCG@10": 0.06988547622617816,
+    "Coverage@10": 0.3893079698261725,
+    "AvgPop@10": 140.16394160583943,
+    "TailShare@10": 0.06413911550021469
+   },
+   {
+    "beta": 1.25,
+    "NDCG@10": 0.06706486897457423,
+    "Coverage@10": 0.31584125942932106,
+    "AvgPop@10": 154.73246457707168,
+    "TailShare@10": 0.0466337483898669
+   }
+  ]
+ },
+ "review_labels": {
+  "1": {
+   "dislike": 1690,
+   "like": 214,
+   "not_scent": 817,
+   "unclear": 0
+  },
+  "2": {
+   "dislike": 1136,
+   "like": 293,
+   "not_scent": 441,
+   "unclear": 0
+  },
+  "3": {
+   "dislike": 778,
+   "like": 1012,
+   "not_scent": 689,
+   "unclear": 1552
+  }
+ }
+}

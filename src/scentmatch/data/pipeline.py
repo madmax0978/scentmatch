@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 from scentmatch.config import load_config
-from scentmatch.data.vocab import build_vocabulary, load_vocabulary, save_vocabulary
+from scentmatch.data.vocab import NOT_A_NOTE_AFTER, build_vocabulary, load_vocabulary, save_vocabulary
 
 META_FILE = "meta_Beauty_and_Personal_Care.jsonl"
 RATINGS_FILE = "Beauty_and_Personal_Care.csv"
@@ -74,19 +74,51 @@ def filter_fragrance_items(meta_path: Path, category: str = "Fragrance") -> pd.D
 # --------------------------------------------------------------------------- 2
 def compile_note_matcher(surface_forms: dict[str, str]) -> re.Pattern:
     forms = sorted(surface_forms, key=len, reverse=True)       # longest match first
-    pattern = r"(?<![a-z])(" + "|".join(re.escape(f) for f in forms) + r")(?![a-z])"
+    # optional plural ("blossoms", "roses"): without it, "orange blossoms" fell back to "orange"
+    pattern = r"(?<![a-z])(" + "|".join(re.escape(f) for f in forms) + r")(?:e?s)?(?![a-z])"
     return re.compile(pattern, flags=re.IGNORECASE)
 
 
 def extract_notes(items: pd.DataFrame, vocab: dict) -> pd.DataFrame:
-    """Return a long table (parent_asin, note) of notes found in each item's text."""
+    """Return a long table (parent_asin, note) of notes found in each item's text.
+
+    Week 3 audit fixes: plurals are matched ("orange blossoms" -> orange blossom, it used to
+    fall back to "orange"), and a note followed by a non-scent word is dropped
+    ("rose gold", "amber glass", "coconut oil")."""
     surface = vocab["surface_forms"]
     matcher = compile_note_matcher(surface)
     pairs = []
     for asin, text in zip(items["parent_asin"], items["text"]):
-        found = {surface[m.lower()] for m in matcher.findall(text) if m.lower() in surface}
+        found = set()
+        for m in matcher.finditer(text):
+            form = m.group(1).lower()
+            if form not in surface:
+                continue
+            note = surface[form]
+            stop = NOT_A_NOTE_AFTER.get(note) or NOT_A_NOTE_AFTER.get(form)
+            if stop and re.match(rf"\s*-?\s*({stop})\b", text[m.end():m.end() + 25], flags=re.I):
+                continue
+            found.add(note)
         pairs.extend((asin, n) for n in found)
     return pd.DataFrame(pairs, columns=["parent_asin", "note"])
+
+
+# Week 3: product type, so that the app can show perfumes first. Sets, minis and body
+# products stay in the data (people rated them) but are flagged.
+_SET = r"gift set|\bset\b|\d\s*-?\s*pc\b|\d\s*-?\s*pieces?\b|coffret|sampler|samples?\b|discovery|variety pack|\bkit\b"
+_BODY = r"body mist|body spray|hair mist|hair & body|lotion|shower gel|body wash|deodorant|dusting powder|candle|wax melt"
+_MINI = r"\bmini\b|miniature|travel size|rollerball|roll-on|(?<![\d.])0?\.\d+\s*(fl\.?\s*)?(oz|ounce)\b|(?<![\d.])([1-9]|1[0-5])\s*ml\b"
+
+
+def product_type(title: str) -> str:
+    t = str(title).lower()
+    if re.search(_SET, t):
+        return "set"
+    if re.search(_BODY, t):
+        return "body"
+    if re.search(_MINI, t):
+        return "mini"
+    return "perfume"
 
 
 # --------------------------------------------------------------------------- 3
@@ -192,6 +224,8 @@ def run(cfg: dict, k: int | None = None) -> dict:
     notes_per_item = kn.groupby("item_idx")["note"].apply(lambda s: ", ".join(sorted(s)))
     cat["notes"] = cat["item_idx"].map(notes_per_item).fillna("")
     cat["train_popularity"] = cat["item_idx"].map(train["item_idx"].value_counts()).fillna(0).astype(int)
+    cat["product_type"] = cat["title"].map(product_type)
+    stats["product_types"] = cat["product_type"].value_counts().to_dict()
     cat.drop(columns=["text"]).sort_values("item_idx").to_parquet(out / "items.parquet", index=False)
     train.to_parquet(out / "train.parquet", index=False)
     val.to_parquet(out / "val.parquet", index=False)

@@ -10,7 +10,15 @@
 * ScentMatch extension: optional note nodes. The same neighbour-layer contrast is applied
   to (perfume, note) edges, pulling perfumes that share notes together.
 
-Loss:  L = L_bpr + lambda_1 * (alpha * L_nl^u + (1 - alpha) * L_nl^i [+ L_nl^note]) + lambda_2 ||Theta||^2
+Loss:  L = L_bpr + lambda_1 * (alpha * L_nl^u + (1 - alpha) * L_nl^i) + lambda_note * L_nl^note
+           + lambda_2 ||Theta||^2
+
+Week 3 changes
+* the note term has its own weight lambda_note (it used to share lambda_1);
+* the trainer feeds (perfume, note) pairs with *distinct* notes in a batch: with only ~470
+  notes, random pairs repeated the same note, so InfoNCE pushed a note away from itself
+  (false negatives) - the likely reason why notes hurt accuracy in Week 2;
+* `cl_weight = 0` gives LightGCN, the baseline NLGCL extends (ablation of the paper's idea).
 """
 from __future__ import annotations
 
@@ -25,12 +33,13 @@ from scentmatch.model.graph import Graph
 class NLGCL(nn.Module):
     def __init__(self, graph: Graph, embedding_size: int = 64, n_layers: int = 2,
                  cl_layers: int = 2, cl_temp: float = 0.1, cl_weight: float = 5e-5,
-                 reg_weight: float = 1e-4, alpha: float = 0.6, **_):
+                 reg_weight: float = 1e-4, alpha: float = 0.6, note_cl_weight: float | None = None, **_):
         super().__init__()
         assert 1 <= cl_layers <= n_layers, "G must satisfy 1 <= G <= L"
         self.n_users, self.n_items, self.n_notes = graph.n_users, graph.n_items, graph.n_notes
         self.n_layers, self.cl_layers = n_layers, cl_layers
         self.cl_temp, self.cl_weight, self.reg_weight, self.alpha = cl_temp, cl_weight, reg_weight, alpha
+        self.note_cl_weight = cl_weight if note_cl_weight is None else note_cl_weight
         self.embedding = nn.Embedding(graph.n_nodes, embedding_size)
         nn.init.xavier_uniform_(self.embedding.weight)
         self.conv = LGConv(normalize=False)          # weights already normalised in Graph
@@ -63,8 +72,9 @@ class NLGCL(nn.Module):
         logits = a @ p.T / self.cl_temp
         return F.cross_entropy(logits, torch.arange(len(a), device=a.device), reduction="sum")
 
-    def neighbor_layer_cl(self, layers, users, items, note_pairs=None) -> torch.Tensor:
-        cl_u = cl_i = cl_n = 0.0
+    def neighbor_layer_cl(self, layers, users, items, note_pairs=None) -> tuple[torch.Tensor, torch.Tensor]:
+        """Return (user-perfume contrastive loss, perfume-note contrastive loss)."""
+        cl_u = cl_i = cl_n = torch.zeros(())
         for g in range(self.cl_layers):
             u_g, i_g, n_g = self._split(layers[g])
             u_next, i_next, n_next = self._split(layers[g + 1])
@@ -74,7 +84,7 @@ class NLGCL(nn.Module):
                 p_items, p_notes = note_pairs
                 cl_n = cl_n + self._info_nce(n_next[p_notes], i_g[p_items]) \
                             + self._info_nce(i_next[p_items], n_g[p_notes])
-        return self.alpha * cl_u + (1 - self.alpha) * cl_i + cl_n
+        return self.alpha * cl_u + (1 - self.alpha) * cl_i, cl_n
 
     def loss(self, users: torch.Tensor, pos: torch.Tensor, neg: torch.Tensor,
              note_pairs: tuple[torch.Tensor, torch.Tensor] | None = None) -> dict[str, torch.Tensor]:
@@ -84,9 +94,13 @@ class NLGCL(nn.Module):
         ego = self.embedding.weight
         reg = (ego[users].pow(2).sum() + ego[pos + self.n_users].pow(2).sum()
                + ego[neg + self.n_users].pow(2).sum()) / 2 / len(users)
-        cl = self.neighbor_layer_cl(layers, users, pos, note_pairs)
-        total = bpr + self.cl_weight * cl + self.reg_weight * reg
-        return {"loss": total, "bpr": bpr.detach(), "cl": cl.detach(), "reg": reg.detach()}
+        if self.cl_weight > 0 or (note_pairs is not None and self.note_cl_weight > 0):
+            cl, cl_note = self.neighbor_layer_cl(layers, users, pos, note_pairs)
+        else:                                            # LightGCN: no contrastive term at all
+            cl = cl_note = torch.zeros(())
+        total = bpr + self.cl_weight * cl + self.note_cl_weight * cl_note + self.reg_weight * reg
+        return {"loss": total, "bpr": bpr.detach(), "cl": cl.detach(), "cl_note": cl_note.detach(),
+                "reg": reg.detach()}
 
     # ------------------------------------------------------------------ inference
     @torch.no_grad()

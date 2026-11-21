@@ -1,0 +1,23 @@
+{
+ "runs": [
+  {
+   "checkpoint": "final_nlgcl_notes_rescued_s3.pt",
+   "split": "test",
+   "w_avoid": 0.1,
+   "n_users": 1553,
+   "n_future_dislike_pairs": 334,
+   "without": {
+    "NDCG@10": 0.05582531263917638,
+    "closeness_to_rejected@10": 0.2996203447630253,
+    "LikeVsDislike(future)": 0.5179640718562875
+   },
+   "with": {
+    "NDCG@10": 0.054717817854672446,
+    "closeness_to_rejected@10": 0.2761015337623608,
+    "LikeVsDislike(future)": 0.5179640718562875
+   }
+  }
+ ],
+ "baseline_NDCG@10": 0.05582531263917638,
+ "chosen_w_avoid": 0.1
+}

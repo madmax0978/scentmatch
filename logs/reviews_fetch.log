@@ -1,0 +1,13 @@
+  2M lines read, 12,848 kept, 34s
+  4M lines read, 26,868 kept, 70s
+  6M lines read, 40,180 kept, 106s
+  8M lines read, 50,536 kept, 140s
+  10M lines read, 59,851 kept, 176s
+  12M lines read, 68,974 kept, 211s
+  14M lines read, 77,728 kept, 243s
+  16M lines read, 86,927 kept, 275s
+  18M lines read, 93,690 kept, 308s
+  20M lines read, 100,465 kept, 345s
+  22M lines read, 105,013 kept, 379s
+read 23,911,390 lines in 411s, kept 106,372 reviews
+wrote /Users/maximedutertre/Desktop/Ecole/ECE/5eme annee/Recommender Systems/Projet/scentmatch/data/raw/kcore_reviews.parquet
