@@ -1,0 +1,83 @@
+[
+ {
+  "name": "final_nlgcl_mainnotes_s1",
+  "overrides": {
+   "use_notes": true,
+   "max_notes_per_item": 3,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 0.0,
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_rescued_s1",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_nlgcl_rescued_s1",
+  "overrides": {
+   "use_notes": false,
+   "seed": 1
+  }
+ },
+ {
+  "name": "final_nlgcl_mainnotes_s2",
+  "overrides": {
+   "use_notes": true,
+   "max_notes_per_item": 3,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 0.0,
+   "seed": 2
+  }
+ },
+ {
+  "name": "final_nlgcl_notes_rescued_s2",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "seed": 2
+  }
+ },
+ {
+  "name": "final_nlgcl_rescued_s2",
+  "overrides": {
+   "use_notes": false,
+   "seed": 2
+  }
+ },
+ {
+  "name": "cold_nlgcl_mainnotes",
+  "overrides": {
+   "use_notes": true,
+   "max_notes_per_item": 3,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 0.0,
+   "seed": 3,
+   "train_file": "cold/train.parquet"
+  }
+ },
+ {
+  "name": "cold_nlgcl_notes",
+  "overrides": {
+   "use_notes": true,
+   "note_edge_weight": 0.3,
+   "note_cl_weight": 1e-05,
+   "seed": 3,
+   "train_file": "cold/train.parquet"
+  }
+ },
+ {
+  "name": "cold_nlgcl_rescued",
+  "overrides": {
+   "use_notes": false,
+   "seed": 3,
+   "train_file": "cold/train.parquet"
+  }
+ }
+]

@@ -5,7 +5,7 @@ Each line of a sweep is a set of overrides on configs/default.yaml. Runs go in p
 best validation metrics and the best epoch. The test split is never loaded (train.py
 uses EvalData.load(with_test=False)).
 
-Run:  python -m scentmatch.train.sweep <stage>      stages: core, layers, notes, feedback, seeds
+Run:  python -m scentmatch.train.sweep <stage>      stages: core, layers, notes, mainnotes, mainnotes2, feedback
 """
 from __future__ import annotations
 
@@ -61,6 +61,17 @@ def stage_jobs(stage: str, best: dict) -> list[dict]:
         for w, ncl in itertools.product([1.0, 0.3, 0.1], [0.0, best["cl_weight"], 5 * best["cl_weight"]]):
             jobs.append({"name": f"notes_w{w:g}_ncl{ncl:g}",
                          "overrides": {**best, "use_notes": True, "note_edge_weight": w, "note_cl_weight": ncl}})
+    elif stage == "mainnotes":   # notes v2: keep only the k most distinctive notes per perfume
+        base = {"use_notes": True, "note_edge_weight": 0.3, "note_cl_weight": 1e-5, "seed": 3}
+        for k in (3, 5, 8):
+            jobs.append({"name": f"mainnotes_k{k}", "overrides": {**base, "max_notes_per_item": k}})
+        jobs.append({"name": "mainnotes_none_nonotes", "overrides": {"use_notes": False, "seed": 3}})
+    elif stage == "mainnotes2":  # at the best k: note contrastive weight and edge weight again
+        k = best.get("max_notes_per_item", 5)
+        base = {"use_notes": True, "max_notes_per_item": k, "seed": 3}
+        for w, ncl in ((0.3, 0.0), (0.3, 5e-5), (0.6, 1e-5), (0.1, 1e-5)):
+            jobs.append({"name": f"mainnotes2_k{k}_w{w:g}_ncl{ncl:g}",
+                         "overrides": {**base, "note_edge_weight": w, "note_cl_weight": ncl}})
     elif stage == "feedback":    # explicit dislikes as hard negatives, rescued positives
         for notes in (False, True):
             base = {**best, **(best.get("_notes") or {})} if notes else dict(best)

@@ -1,0 +1,6 @@
+[
+ {"name": "mainnotes2_k3_w0.3_ncl0", "overrides": {"use_notes": true, "max_notes_per_item": 3, "note_edge_weight": 0.3, "note_cl_weight": 0.0, "seed": 3}},
+ {"name": "mainnotes2_k3_w0.3_ncl5e-05", "overrides": {"use_notes": true, "max_notes_per_item": 3, "note_edge_weight": 0.3, "note_cl_weight": 5e-05, "seed": 3}},
+ {"name": "mainnotes2_k3_w0.6_ncl1e-05", "overrides": {"use_notes": true, "max_notes_per_item": 3, "note_edge_weight": 0.6, "note_cl_weight": 1e-05, "seed": 3}},
+ {"name": "mainnotes2_full_control", "overrides": {"use_notes": true, "note_edge_weight": 0.3, "note_cl_weight": 1e-05, "seed": 3}}
+]

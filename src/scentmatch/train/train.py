@@ -14,6 +14,7 @@ Week 3
 * explicit dislikes (`--dislike-neg-prob p`): with probability p the negative of a user who
   disliked a perfume *during the training period* is that perfume instead of a random one,
   so the model learns "not this one" and not only "not a random one";
+* notes v2 (`--max-notes k`): only the k most distinctive notes of each perfume become edges;
 * the checkpoint stores the final embeddings, so serving never rebuilds the graph.
 
 Run:  python -m scentmatch.train.train [--use-notes] [--seed 1] [--cl-weight 0] ...
@@ -32,7 +33,7 @@ import torch
 
 from scentmatch.config import load_config
 from scentmatch.eval.harness import EvalData, evaluate_scores
-from scentmatch.model.graph import build_graph
+from scentmatch.model.graph import build_graph, main_notes
 from scentmatch.model.nlgcl import NLGCL
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -84,6 +85,8 @@ def load_feedback(proc: Path) -> pd.DataFrame | None:
 def build_model(cfg: dict, data: EvalData, use_notes: bool) -> tuple[NLGCL, pd.DataFrame | None]:
     proc = cfg["paths"]["processed_dir"]
     item_notes, n_notes = (load_item_notes(proc) if use_notes else (None, 0))
+    if item_notes is not None:                     # Week 3: only the main notes of each perfume
+        item_notes = main_notes(item_notes, cfg["model"].get("max_notes_per_item"))
     graph = build_graph(data.train, data.n_users, data.n_items, item_notes, n_notes,
                         note_edge_weight=cfg["model"].get("note_edge_weight", 1.0))
     return NLGCL(graph, **cfg["model"]), item_notes
@@ -241,6 +244,7 @@ def apply_overrides(cfg: dict, args: argparse.Namespace) -> dict:
         "cl_weight": (m, "cl_weight"), "note_cl_weight": (m, "note_cl_weight"), "reg_weight": (m, "reg_weight"),
         "n_layers": (m, "n_layers"), "cl_layers": (m, "cl_layers"), "emb_size": (m, "embedding_size"),
         "cl_temp": (m, "cl_temp"), "note_edge_weight": (m, "note_edge_weight"),
+        "max_notes": (m, "max_notes_per_item"),
     }.items():
         value = getattr(args, flag, None)
         if value is not None:
@@ -261,7 +265,7 @@ def main() -> None:
     for flag, typ in (("lr", float), ("batch-size", int), ("seed", int), ("cl-weight", float),
                       ("note-cl-weight", float), ("reg-weight", float), ("n-layers", int), ("cl-layers", int),
                       ("emb-size", int), ("cl-temp", float), ("note-edge-weight", float),
-                      ("dislike-neg-prob", float), ("patience", int)):
+                      ("dislike-neg-prob", float), ("patience", int), ("max-notes", int)):
         ap.add_argument(f"--{flag}", type=typ, default=None)
     ap.add_argument("--rescued-positives", action="store_true",
                     help="add 1-3 star reviews whose text praises the scent as training positives")
