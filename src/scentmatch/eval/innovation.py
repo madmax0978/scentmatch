@@ -206,7 +206,7 @@ def markdown(res: dict) -> str:
 
 
 def _kv(specs: list[str], many: bool = False) -> dict:
-    out = dict(s.split("=", 1) for s in specs)
+    out = dict(s.rsplit("=", 1) for s in specs)     # names may contain "=" ("k=3")
     return {k: v.split(",") for k, v in out.items()} if many else out
 
 

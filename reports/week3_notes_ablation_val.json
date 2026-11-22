@@ -1,0 +1,221 @@
+{
+ "split": "val",
+ "checkpoints": {
+  "warm": {
+   "No notes": [
+    "final_nlgcl_rescued_s1.pt",
+    "final_nlgcl_rescued_s2.pt",
+    "final_nlgcl_rescued_s3.pt"
+   ],
+   "All notes (Week 3 served)": [
+    "final_nlgcl_notes_rescued_s1.pt",
+    "final_nlgcl_notes_rescued_s2.pt",
+    "final_nlgcl_notes_rescued_s3.pt"
+   ],
+   "Main notes (k=3, notes v2)": [
+    "final_nlgcl_mainnotes_s1.pt",
+    "final_nlgcl_mainnotes_s2.pt",
+    "final_nlgcl_mainnotes_s3.pt"
+   ]
+  },
+  "cold": {
+   "No notes": "cold_nlgcl_rescued.pt",
+   "All notes (Week 3 served)": "cold_nlgcl_notes.pt",
+   "Main notes (k=3, notes v2)": "cold_nlgcl_mainnotes.pt"
+  }
+ },
+ "warm": {
+  "No notes": {
+   "NDCG@10": 0.06850187284900029,
+   "NDCG@10_std": 0.0005068315841783047,
+   "Recall@20": 0.17219121225132392,
+   "Recall@20_std": 0.0005923630195097929,
+   "Coverage@10": 0.45053022849021535,
+   "Coverage@10_std": 0.004024676972603018,
+   "AvgPop@10": 140.96787462430225,
+   "AvgPop@10_std": 0.49611667289513506,
+   "n_users": 23290.0,
+   "n_users_std": 0.0,
+   "ILD@10": 0.902818051146982,
+   "ILD@10_std": 0.0002652205787269208,
+   "BrandDiversity@10": 0.7674180621153571,
+   "BrandDiversity@10_std": 0.0008873541646100648,
+   "NoteGrounded@10": 0.4832889652211249,
+   "NoteGrounded@10_std": 0.003031486841280993,
+   "n_seeds": 3
+  },
+  "All notes (Week 3 served)": {
+   "NDCG@10": 0.0695473676592815,
+   "NDCG@10_std": 0.00039455362153505884,
+   "Recall@20": 0.17442393015600402,
+   "Recall@20_std": 0.0018238490766575377,
+   "Coverage@10": 0.3869028096643708,
+   "Coverage@10_std": 0.011828009585189507,
+   "AvgPop@10": 141.70493058537284,
+   "AvgPop@10_std": 1.3458332377960895,
+   "n_users": 23290.0,
+   "n_users_std": 0.0,
+   "ILD@10": 0.8983857000662404,
+   "ILD@10_std": 0.0004727678232980043,
+   "BrandDiversity@10": 0.7639916988693288,
+   "BrandDiversity@10_std": 0.0013527662245008782,
+   "NoteGrounded@10": 0.48416201517103197,
+   "NoteGrounded@10_std": 0.0009847659324842706,
+   "n_seeds": 3
+  },
+  "Main notes (k=3, notes v2)": {
+   "NDCG@10": 0.06942789742556219,
+   "NDCG@10_std": 0.0005086939477400392,
+   "Recall@20": 0.17582653499355946,
+   "Recall@20_std": 0.0015898246957126404,
+   "Coverage@10": 0.4367005575598557,
+   "Coverage@10_std": 0.015567654032542896,
+   "AvgPop@10": 140.30271361099184,
+   "AvgPop@10_std": 0.3916149806919848,
+   "n_users": 23290.0,
+   "n_users_std": 0.0,
+   "ILD@10": 0.9011713388718734,
+   "ILD@10_std": 0.002109527777839622,
+   "BrandDiversity@10": 0.7644640045799344,
+   "BrandDiversity@10_std": 0.0032742247185599104,
+   "NoteGrounded@10": 0.4989251467010161,
+   "NoteGrounded@10_std": 0.00900299748641676,
+   "n_seeds": 3
+  }
+ },
+ "warm_beta0.5": {
+  "No notes": {
+   "NDCG@10": 0.06985159919606206,
+   "NDCG@10_std": 0.000773654987926324,
+   "Recall@20": 0.1719049663661085,
+   "Recall@20_std": 0.0002858878539493116,
+   "Coverage@10": 0.7235159068547065,
+   "Coverage@10_std": 0.0026032318573938128,
+   "AvgPop@10": 98.62624302275655,
+   "AvgPop@10_std": 0.6183968957530813,
+   "n_users": 23290.0,
+   "n_users_std": 0.0,
+   "ILD@10": 0.9014452370767172,
+   "ILD@10_std": 0.00047637216824276664,
+   "BrandDiversity@10": 0.7475053671103478,
+   "BrandDiversity@10_std": 0.0009197817926855434,
+   "NoteGrounded@10": 0.46970516673822815,
+   "NoteGrounded@10_std": 0.002732460624891317,
+   "n_seeds": 3
+  },
+  "All notes (Week 3 served)": {
+   "NDCG@10": 0.07158992156155829,
+   "NDCG@10_std": 0.0006518071244479353,
+   "Recall@20": 0.1750536711034779,
+   "Recall@20_std": 0.0015046299242537672,
+   "Coverage@10": 0.6519623920411064,
+   "Coverage@10_std": 0.008958519530977016,
+   "AvgPop@10": 99.75532274223559,
+   "AvgPop@10_std": 0.8738549638392963,
+   "n_users": 23290.0,
+   "n_users_std": 0.0,
+   "ILD@10": 0.8915635151020457,
+   "ILD@10_std": 0.0008983555536850417,
+   "BrandDiversity@10": 0.743420638328324,
+   "BrandDiversity@10_std": 0.003179290858591697,
+   "NoteGrounded@10": 0.4702647774438242,
+   "NoteGrounded@10_std": 0.0029947554917609345,
+   "n_seeds": 3
+  },
+  "Main notes (k=3, notes v2)": {
+   "NDCG@10": 0.0713955608051149,
+   "NDCG@10_std": 0.000836657827484021,
+   "Recall@20": 0.1742808072133963,
+   "Recall@20_std": 0.0010552344978483881,
+   "Coverage@10": 0.7167377282169017,
+   "Coverage@10_std": 0.01287211563490698,
+   "AvgPop@10": 97.69555746386145,
+   "AvgPop@10_std": 0.7637681181164706,
+   "n_users": 23290.0,
+   "n_users_std": 0.0,
+   "ILD@10": 0.8967477359627164,
+   "ILD@10_std": 0.0030746348603114125,
+   "BrandDiversity@10": 0.7429240017174754,
+   "BrandDiversity@10_std": 0.0019058801552152952,
+   "NoteGrounded@10": 0.48934735938170887,
+   "NoteGrounded@10_std": 0.010112426231170474,
+   "n_seeds": 3
+  }
+ },
+ "cold_quiz": {
+  "No notes": {
+   "NDCG@10": 0.04822626587053774,
+   "Recall@20": 0.08855541429295245,
+   "Coverage@10": 0.23204329288291242,
+   "ILD@10": 0.7292547252905479,
+   "BrandDiversity@10": 0.7437436419125127,
+   "NotePrecision": 1.0,
+   "Explained@10": 1.0,
+   "n_users": 983,
+   "DeletionDrop@10": 0.8521338194295518,
+   "RandomDrop@10": 0.3371824480369515,
+   "n_deletion_tests": 9326,
+   "n_random_tests": 6928
+  },
+  "All notes (Week 3 served)": {
+   "NDCG@10": 0.049783296176164976,
+   "Recall@20": 0.09388454970989639,
+   "Coverage@10": 0.23778287963266645,
+   "ILD@10": 0.7064175503568166,
+   "BrandDiversity@10": 0.7654120040691761,
+   "NotePrecision": 1.0,
+   "Explained@10": 1.0,
+   "n_users": 983,
+   "DeletionDrop@10": 0.8688403503218318,
+   "RandomDrop@10": 0.20498853211009174,
+   "n_deletion_tests": 9477,
+   "n_random_tests": 6976
+  },
+  "Main notes (k=3, notes v2)": {
+   "NDCG@10": 0.04060859603202431,
+   "Recall@20": 0.07275918667068208,
+   "Coverage@10": 0.27648409314529354,
+   "ILD@10": 0.6806788200253377,
+   "BrandDiversity@10": 0.7251271617497457,
+   "NotePrecision": 1.0,
+   "Explained@10": 1.0,
+   "n_users": 983,
+   "DeletionDrop@10": 0.889708173226711,
+   "RandomDrop@10": 0.22373964840912394,
+   "n_deletion_tests": 9629,
+   "n_random_tests": 6883
+  }
+ },
+ "cold_quiz_like": {
+  "No notes": {
+   "NDCG@10": 0.07462979632169146,
+   "Recall@20": 0.1369536852153093,
+   "Coverage@10": 0.27025254181698916,
+   "ILD@10": 0.8358628086940313,
+   "BrandDiversity@10": 0.7688708036622584,
+   "NotePrecision": 1.0,
+   "Explained@10": 1.0,
+   "n_users": 983
+  },
+  "All notes (Week 3 served)": {
+   "NDCG@10": 0.07436307602053391,
+   "Recall@20": 0.14230373619233463,
+   "Coverage@10": 0.27074450639553954,
+   "ILD@10": 0.8090849249805394,
+   "BrandDiversity@10": 0.7587995930824009,
+   "NotePrecision": 1.0,
+   "Explained@10": 1.0,
+   "n_users": 983
+  },
+  "Main notes (k=3, notes v2)": {
+   "NDCG@10": 0.07116677848723452,
+   "Recall@20": 0.13386988834283242,
+   "Coverage@10": 0.31666120039357165,
+   "ILD@10": 0.8037185000743542,
+   "BrandDiversity@10": 0.7566632756866734,
+   "NotePrecision": 1.0,
+   "Explained@10": 1.0,
+   "n_users": 983
+  }
+ }
+}

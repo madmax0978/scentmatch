@@ -15,7 +15,8 @@
    "use_notes": true,
    "note_edge_weight": 0.3,
    "note_cl_weight": 1e-05,
-   "seed": 1
+   "seed": 1,
+   "max_notes_per_item": 0
   }
  },
  {
@@ -41,7 +42,8 @@
    "use_notes": true,
    "note_edge_weight": 0.3,
    "note_cl_weight": 1e-05,
-   "seed": 2
+   "seed": 2,
+   "max_notes_per_item": 0
   }
  },
  {
@@ -69,7 +71,8 @@
    "note_edge_weight": 0.3,
    "note_cl_weight": 1e-05,
    "seed": 3,
-   "train_file": "cold/train.parquet"
+   "train_file": "cold/train.parquet",
+   "max_notes_per_item": 0
   }
  },
  {

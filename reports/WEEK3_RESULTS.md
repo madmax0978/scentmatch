@@ -105,3 +105,7 @@ Added on 20 Nov 2026: every reaction can be taken back (`undo` event, append-onl
 ## Hyper-parameter search (validation only)
 
 `reports/sweeps/*.csv`. Contrastive weight λ₁ ≥ 2·10⁻⁴ stops learning (the summed InfoNCE term dominates BPR); best λ₁ = 10⁻⁵ with L2 = 0.1 and 2 layers. LightGCN best: 3 layers, L2 = 0.03. Notes: edge weight 0.3, λ_note = 10⁻⁵. Hard negatives from dislikes (p = 0.3, 0.6): lower NDCG, no gain on dislikes → off. Liked low-star reviews as extra positives: on.
+
+## Notes v2 — with notes vs without notes on every metric
+
+See [`WEEK3_NOTES_V2.md`](WEEK3_NOTES_V2.md): main notes per perfume, cold-start quiz NDCG, coverage and diversity, explanation fidelity, and the frozen notes configuration.

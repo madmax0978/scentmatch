@@ -24,6 +24,10 @@ model:
   use_notes: true              # user-perfume-note graph (the innovation; helps the quiz path)
   note_edge_weight: 0.3        # weight of perfume-note edges (sweep: 1, 0.3, 0.1)
   note_cl_weight: 1.0e-5       # lambda_note, contrastive loss on perfume-note pairs (sweep: 0, 1e-5, 5e-5)
+  max_notes_per_item: 0        # notes v2 option: keep only the k most distinctive notes per perfume
+                               # (0 = all). FROZEN at 0 (Week 3, validation): k = 3 ties on known users
+                               # (NDCG@10 0.0694 vs 0.0695) and covers more (43.7% vs 38.7%), but loses
+                               # 18% NDCG@10 on the quiz path (0.0406 vs 0.0498) - reports/WEEK3_NOTES_V2.md
 
 train:
   epochs: 80
